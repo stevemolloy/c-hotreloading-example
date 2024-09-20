@@ -8,11 +8,11 @@ typedef struct {
   Font font;
 } PlugState;
 
+#ifndef RELEASE
 typedef void (*plug_frame_update_t)(PlugState state);
-
-typedef struct {
-  plug_frame_update_t plug_frame_update;
-} Plug;
+#else
+void plug_frame_update(PlugState state);
+#endif // !RELEASE
 
 #endif // !_PLUGIN_H
 

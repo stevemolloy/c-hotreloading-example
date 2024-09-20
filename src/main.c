@@ -14,8 +14,11 @@
 
 PlugState state = {0};
 
+#ifndef RELEASE
 plug_frame_update_t plug_frame_update = NULL;
+#endif /* ifndef RELEASE */
 
+#ifndef RELEASE
 void plug_reload(const char* filename) {
   static void* plug_lib = NULL;
 
@@ -35,11 +38,14 @@ void plug_reload(const char* filename) {
     exit(1);
   }
 }
+#endif /* ifndef RELEASE */
 
 int main(void) {
+#ifndef RELEASE
   struct stat file_stats = {0};
   time_t last_modified_time = file_stats.st_mtime;
   const char* plug_filename = "./objs/libplug.so";
+#endif /* ifndef RELEASE */
 
   InitWindow(WIDTH, HEIGHT, "Raylib");
   SetTargetFPS(FPS);
@@ -47,8 +53,12 @@ int main(void) {
   state.fontsize = 44;
   state.font = LoadFontEx("RecMonoCasual-Regular-1.085.ttf", state.fontsize, NULL, 0);
 
+#ifndef RELEASE
   size_t frame_counter = 0;
+#endif /* ifndef RELEASE */
+
   while (!WindowShouldClose()) {
+#ifndef RELEASE
     if (frame_counter++ % 10 == 0) {
       stat(plug_filename, &file_stats);
 
@@ -59,6 +69,7 @@ int main(void) {
         TraceLog(LOG_INFO, "Reloaded the main logic");
       }
     }
+#endif /* ifndef RELEASE */
     plug_frame_update(state);
   }
 

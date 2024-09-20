@@ -18,7 +18,10 @@ objs/libplug.so: src/plugin.c
 run: all
 	./main
 
+release: src/main.c src/plugin.c
+	$(CC) $(CFLAGS) -DRELEASE -o $(EXE) $(CINCLUDES) src/main.c src/plugin.c $(CLIBS)
+
 clean:
 	rm -rf objs
-	rm $(EXE)
+	rm -f $(EXE)
 
