@@ -53,21 +53,15 @@ int main(void) {
   state.fontsize = 44;
   state.font = LoadFontEx("RecMonoCasual-Regular-1.085.ttf", state.fontsize, NULL, 0);
 
-#ifndef RELEASE
-  size_t frame_counter = 0;
-#endif /* ifndef RELEASE */
-
   while (!WindowShouldClose()) {
 #ifndef RELEASE
-    if (frame_counter++ % 10 == 0) {
-      stat(plug_filename, &file_stats);
+    stat(plug_filename, &file_stats);
 
-      if (file_stats.st_mtime > last_modified_time) {
-        TraceLog(LOG_INFO, "Plugin file timestamp updated");
-        last_modified_time = file_stats.st_mtime;
-        plug_reload(plug_filename);
-        TraceLog(LOG_INFO, "Reloaded the main logic");
-      }
+    if (file_stats.st_mtime > last_modified_time) {
+      TraceLog(LOG_INFO, "Plugin file timestamp updated");
+      last_modified_time = file_stats.st_mtime;
+      plug_reload(plug_filename);
+      TraceLog(LOG_INFO, "Reloaded the main logic");
     }
 #endif /* ifndef RELEASE */
     plug_frame_update(state);
