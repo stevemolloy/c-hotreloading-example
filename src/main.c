@@ -51,7 +51,7 @@ int main(void) {
   SetTargetFPS(FPS);
 
   state.fontsize = 44;
-  state.font = LoadFontEx("RecMonoCasual-Regular-1.085.ttf", state.fontsize, NULL, 0);
+  state.font = LoadFontEx("assets/RecMonoCasual-Regular-1.085.ttf", state.fontsize, NULL, 0);
 
   while (!WindowShouldClose()) {
 #ifndef RELEASE
